@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stale Element Demo</title>
+<style>
+    body {
+      background: linear-gradient(to right, #00ffff, #00bfff);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 10px;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+  </style>
+  <script>
+    function refreshButton() {
+      const oldButton = document.getElementById("myButton");
+      const parent = oldButton.parentNode;
+      
+      // Remove the button
+      parent.removeChild(oldButton);
+      
+      // Simulate a slight delay before re-adding
+      setTimeout(() => {
+        const newButton = document.createElement("button");
+        newButton.id = "myButton";
+        newButton.innerText = "Click Me Again";
+        newButton.onclick = refreshButton;
+        parent.appendChild(newButton);
+      }, 1000); // 1-second delay to simulate DOM update
+    }
+  </script>
+</head>
+<body>
+  <h2>Stale Element Reference Demo</h2>
+  <p>Click the button below. It will get removed and re-added.</p>
+  <button style="font-size: 20px; padding: 15px 30px;" id="myButton" onclick="refreshButton()">Click Me</button>
+</body>
+</html>
